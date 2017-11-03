@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block style %}<link rel="stylesheet" type="text/css" href="/static/css/home.css"></link> {% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <h1>Would you like to solve a problem? {{ user.username }}</h1>
+  {% else %}
+    <h1>Would you like to solve a problem?</h1>
+  {% endif %}
+{% endblock %}

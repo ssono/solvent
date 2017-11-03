@@ -15,7 +15,25 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls import include
+from django.contrib.auth import views as auth_views
+from ideas import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-]
+    url(r'^$', views.home, name='home'),
+    url(r'^logout/$', auth_views.LogoutView.as_view(template_name='registration/logout.html')),
+    url(r'^success/', views.success),
+    url(r'^register/$', views.register),
+    url('^', include('django.contrib.auth.urls')),
+    ]
+"""
+^login/$ [name='login']
+^logout/$ [name='logout']
+^password_change/$ [name='password_change']
+^password_change/done/$ [name='password_change_done']
+^password_reset/$ [name='password_reset']
+^password_reset/done/$ [name='password_reset_done']
+^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$ [name='password_reset_confirm']
+^reset/done/$ [name='password_reset_complete']
+"""
