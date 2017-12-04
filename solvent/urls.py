@@ -23,8 +23,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
     url(r'^logout/$', auth_views.LogoutView.as_view(template_name='registration/logout.html')),
-    url(r'^success/', views.success),
     url(r'^register/$', views.register),
+    url(r'^my_account/$', views.manage_profile),
+    url(r'^new_post/$', views.create_post),
     url('^', include('django.contrib.auth.urls')),
     ]
 """

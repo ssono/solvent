@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/static/css/account.css"></link>
+<script src="/static/js/account.js"></script>
+{% endblock %}
+
+{% block content %}
+<h1>Your Profile</h1>
+<hr>
+<ul>
+  <li>Username: {{ user.username }}</li>
+  <li id="reputation">Reputation: {{ user.profile.reputation }}</li>
+  <li id="email">Email: {{ user.profile.email }}</li>
+    <form action="/my_account/" method="POST" id="email_edit">
+      Email: <input type="text" name="new_email">
+      <br>
+      <input type="submit" value="Save">
+      {% csrf_token %}
+    </form>
+  <li id="bio">Bio: {{ user.profile.bio }}</li>
+    <form action= "/my_account/" method="POST" id="bio_edit">
+      Bio
+      <br>
+      <textarea name='new_bio' id='new_bio' rows='5' cols='25' placeholder="Your Bio..."></textarea>
+      <br>
+      <input type="submit" value="Save">
+      {% csrf_token %}
+    </form>
+</ul>
+{% endblock %}

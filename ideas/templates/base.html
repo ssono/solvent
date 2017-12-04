@@ -5,10 +5,17 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/static/css/base.css"></link>
+  <title>Solvent</title>
   {% block style %}{% endblock %}
 </head>
 <body>
-  <a id="logout" href="/logout/">Logout</a>
+  <a id="home" href="/">Home | </a>
+  <a id="register" href="/register/">Register | </a>
+  <a id="login" href="/login/">Login | </a>
+  <a id="account" href="/my_account/">Account</a>
+  <a id="logout" href="/logout/">Logout | </a>
+  <a id="new_post" href="/new_post/">Post</a>
+
   {% block content %}
   {% endblock %}
 </body>

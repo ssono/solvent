@@ -3,6 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect, FileRespons
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from ideas.models import PostForm
 # Create your views here.
 
 
@@ -31,7 +32,29 @@ def register(request):
     return render(request, "registration/register.html", {"form": form})
 
 @login_required
-def success(request):
-    if request.user.is_authenticated():
-        us = request.user.username
-    return HttpResponse(us + "logged in")
+def create_post(request):
+    if request.method != 'POST':
+        form = PostForm
+        return render(request, 'new_post.html', {"form": form})
+    else:
+        form = PostForm(data=request.POST)
+        if form.is_valid():
+            new_post = form.save()
+            return redirect('home')
+
+
+@login_required
+def manage_profile(request):
+    usr = request.user
+    pfl = usr.profile
+    if request.method == 'POST':
+        if 'new_email' in request.POST:
+            new_email = str(request.POST['new_email'])
+            pfl.email = new_email
+            pfl.save()
+        if 'new_bio' in request.POST:
+            new_bio = str(request.POST['new_bio'])
+            pfl.bio = new_bio
+            pfl.save()
+    usr = request.user
+    return render(request, 'account.html', {"user": usr})
